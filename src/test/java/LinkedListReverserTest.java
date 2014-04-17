@@ -8,25 +8,37 @@ import static org.testng.AssertJUnit.assertEquals;
 public class LinkedListReverserTest {
     @Test
     public void testReverse() throws Exception {
-        SinglyLinkedList<String> list = new SinglyLinkedList<String>("a");
-        list.addNext("b");
-        list.addNext("c");
-        list.addNext("d");
+        SinglyLinkedList<String> list = new SinglyLinkedList<String>("a","b","c","d","e");
 
-        assertEquals("a->b->c->d", list.toString());
+        assertEquals("a->b->c->d->e", list.toString());
 
         System.out.println(list);
 
-        final SinglyLinkedList reverse = LinkedListReverser.reverse(list);
+        list.reverse();
 
-        assertEquals("d->c->b->a", reverse.toString());
+        assertEquals("e->d->c->b->a", list.toString());
 
-        System.out.println(reverse);
+        System.out.println(list);
+
+        list.reverse();
+
+        assertEquals("a->b->c->d->e", list.toString());
+
+        System.out.println(list);
+
+        SinglyLinkedList<String> list2 = new SinglyLinkedList<String>("a","b");
+
+        list2.reverse();
+
+        assertEquals("b->a", list2.toString());
+
+        System.out.println(list2);
+
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class)
     public void testReverseFail() throws Exception {
-        SinglyLinkedList<String> list = new SinglyLinkedList<String>("a");
-        list.addNext(null);
+        SinglyLinkedList<String> list = new SinglyLinkedList<String>();
+        list.add(null);
     }
 }

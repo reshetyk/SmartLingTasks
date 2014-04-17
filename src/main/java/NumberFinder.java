@@ -13,22 +13,20 @@
  */
 public class NumberFinder {
     private static final int NOT_FOUND = -1;
-    private int[] data;
-    private int searchNum;
+    private final int[] data;
 
-    public NumberFinder(int[] data, int searchNum) {
+    public NumberFinder(int[] data) {
         this.data = data;
-        this.searchNum = searchNum;
     }
 
-    public int findIndex() {
+    public int findIndex(int searchNum) {
         //TODO: check that the array is ordered
         if (data == null || data.length == 0) return NOT_FOUND;
 
-        return findIndexInRange(0, data.length);
+        return findIndexInRange(0, data.length, searchNum);
     }
 
-    private int findIndexInRange(int minRange, int maxRange) {
+    private int findIndexInRange(int minRange, int maxRange, int searchNum) {
         assert(minRange < maxRange);
 
         if (maxRange - minRange <= 2 ) {
@@ -39,7 +37,7 @@ public class NumberFinder {
             }
             return NOT_FOUND;
         }
-        int middle = (maxRange + minRange) / 2;
+        int middle = (minRange + maxRange) / 2;
 
         if (searchNum >= data[middle]) {
             minRange = 0;
@@ -47,6 +45,6 @@ public class NumberFinder {
         } else {
             minRange = middle;
         }
-        return findIndexInRange(minRange, maxRange);
+        return findIndexInRange(minRange, maxRange, searchNum);
     }
 }
