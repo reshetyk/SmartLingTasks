@@ -15,36 +15,37 @@ public class NumberFinder {
     private static final int NOT_FOUND = -1;
     private final int[] data;
 
+    //TODO: for tests
+    private int countIterations;
+
     public NumberFinder(int[] data) {
         this.data = data;
     }
 
     public int findIndex(int searchNum) {
+        countIterations = 0;
         //TODO: check that the array is ordered
         if (data == null || data.length == 0) return NOT_FOUND;
 
-        return findIndexInRange(0, data.length, searchNum);
+        return findIndexInRange(0, data.length - 1, searchNum);
     }
 
     private int findIndexInRange(int minRange, int maxRange, int searchNum) {
-        assert(minRange < maxRange);
-
-        if (maxRange - minRange <= 2 ) {
-            for (int i = minRange; i <= maxRange; i++) {
-                if(data[i] == searchNum) {
-                    return i;
-                }
+        while(minRange <= maxRange) {
+            ++countIterations;
+            int middle = (minRange + maxRange) / 2;
+            if (searchNum > data[middle]) {
+                maxRange = middle - 1;
+            } else if (searchNum < data[middle]) {
+                minRange = middle + 1;
+            } else {
+                return middle;
             }
-            return NOT_FOUND;
         }
-        int middle = (minRange + maxRange) / 2;
+        return NOT_FOUND;
+    }
 
-        if (searchNum >= data[middle]) {
-            minRange = 0;
-            maxRange = middle;
-        } else {
-            minRange = middle;
-        }
-        return findIndexInRange(minRange, maxRange, searchNum);
+    public int getCountIterations() {
+        return countIterations;
     }
 }
