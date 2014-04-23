@@ -50,5 +50,9 @@ public class NumberFinderTest {
         final NumberFinder numberFinderEmpty = new NumberFinder(new int []{});
         assertEquals(-1, numberFinderEmpty.findIndex(1));
         assertEquals(0, numberFinderEmpty.getCountIterations());
+
+        final NumberFinder numberFinderOne = new NumberFinder(new int []{0});
+        assertEquals(-1, numberFinderOne.findIndex(1));
+        assertEquals(0, numberFinderOne.findIndex(0));
     }
 }

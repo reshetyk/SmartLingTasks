@@ -33,7 +33,7 @@ public class NumberFinder {
     private int findIndexInRange(int minRange, int maxRange, int searchNum) {
         while(minRange <= maxRange) {
             ++countIterations;
-            int middle = (minRange + maxRange) / 2;
+            int middle = minRange + ((maxRange - minRange) / 2);
             if (searchNum > data[middle]) {
                 maxRange = middle - 1;
             } else if (searchNum < data[middle]) {
